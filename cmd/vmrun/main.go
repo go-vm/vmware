@@ -6,14 +6,14 @@ package main
 
 import "github.com/go-vm/vmware/fusion"
 
+const vmwarevmPath = "/Volumes/APFS/VirtualMachine/macOS-10.12.vmwarevm"
+
 func main() {
-	err := fusion.Start("/Volumes/APFS/VirtualMachine/macOS-10.12.vmwarevm", true)
-	if err != nil {
+	if err := fusion.Start(vmwarevmPath, false); err != nil {
 		panic(err.Error())
 	}
 
-	err = fusion.Stop("/Volumes/APFS/VirtualMachine/macOS-10.12.vmwarevm", true)
-	if err != nil {
+	if err := fusion.Stop(vmwarevmPath, true); err != nil {
 		panic(err.Error())
 	}
 }
