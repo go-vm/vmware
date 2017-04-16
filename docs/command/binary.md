@@ -1,0 +1,54 @@
+# Binary
+
+List of executable binary command in the `VWware Fusion.app`
+
+- /Applications/VMware Fusion.app/Contents/Library/dockers/fusionRepairPermissionsTool
+- /Applications/VMware Fusion.app/Contents/Library/dockers/proxyApp-template-app/Contents/MacOS/vmware-docker
+- /Applications/VMware Fusion.app/Contents/Library/licenses/vmware-licenseTool
+- /Applications/VMware Fusion.app/Contents/Library/mkisofs
+- /Applications/VMware Fusion.app/Contents/Library/mkntfs
+- /Applications/VMware Fusion.app/Contents/Library/ntfscat
+- /Applications/VMware Fusion.app/Contents/Library/ntfscp
+- /Applications/VMware Fusion.app/Contents/Library/ntfsls
+- /Applications/VMware Fusion.app/Contents/Library/ntfsresize
+- /Applications/VMware Fusion.app/Contents/Library/regval
+- /Applications/VMware Fusion.app/Contents/Library/scriptreg
+- /Applications/VMware Fusion.app/Contents/Library/services/Open VMware Fusion Services
+- /Applications/VMware Fusion.app/Contents/Library/services/Open VMware Graphics Service
+- /Applications/VMware Fusion.app/Contents/Library/services/Open VMware USB Arbitrator Service
+- /Applications/VMware Fusion.app/Contents/Library/services/VMware Fusion Services
+- /Applications/VMware Fusion.app/Contents/Library/services/VMware Graphics Service
+- /Applications/VMware Fusion.app/Contents/Library/services/VMware USB Arbitrator Service
+- /Applications/VMware Fusion.app/Contents/Library/shares/fusionShareTool
+- /Applications/VMware Fusion.app/Contents/Library/thnuclnt/.thnumod
+- /Applications/VMware Fusion.app/Contents/Library/thnuclnt/thnuclnt
+- /Applications/VMware Fusion.app/Contents/Library/thnuclnt/thnucups
+- /Applications/VMware Fusion.app/Contents/Library/unrar
+- /Applications/VMware Fusion.app/Contents/Library/vmnet-bridge
+- /Applications/VMware Fusion.app/Contents/Library/vmnet-cfgcli
+- /Applications/VMware Fusion.app/Contents/Library/vmnet-cli
+- /Applications/VMware Fusion.app/Contents/Library/vmnet-dhcpd
+- /Applications/VMware Fusion.app/Contents/Library/vmnet-natd
+- /Applications/VMware Fusion.app/Contents/Library/vmnet-netifup
+- /Applications/VMware Fusion.app/Contents/Library/vmnet-sniffer
+- /Applications/VMware Fusion.app/Contents/Library/vmrun
+- /Applications/VMware Fusion.app/Contents/Library/vmss2core
+- /Applications/VMware Fusion.app/Contents/Library/VMware Fusion Start Menu.app/Contents/MacOS/VMware Fusion Start Menu
+- /Applications/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool
+- /Applications/VMware Fusion.app/Contents/Library/vmware-aewp
+- /Applications/VMware Fusion.app/Contents/Library/vmware-authd
+- /Applications/VMware Fusion.app/Contents/Library/vmware-cloneBootCamp
+- /Applications/VMware Fusion.app/Contents/Library/vmware-id
+- /Applications/VMware Fusion.app/Contents/Library/vmware-ntfs
+- /Applications/VMware Fusion.app/Contents/Library/vmware-rawdiskAuthTool
+- /Applications/VMware Fusion.app/Contents/Library/vmware-rawdiskCreator
+- /Applications/VMware Fusion.app/Contents/Library/vmware-remotemks
+- /Applications/VMware Fusion.app/Contents/Library/vmware-usbarbitrator
+- /Applications/VMware Fusion.app/Contents/Library/vmware-vdiskmanager
+- /Applications/VMware Fusion.app/Contents/Library/vmware-vmdkserver
+- /Applications/VMware Fusion.app/Contents/Library/vmware-vmx
+- /Applications/VMware Fusion.app/Contents/Library/vmware-vmx-debug
+- /Applications/VMware Fusion.app/Contents/Library/vmware-vmx-stats
+- /Applications/VMware Fusion.app/Contents/Library/vprobes/emmett
+- /Applications/VMware Fusion.app/Contents/Library/vprobes/vmware-vprobe
+- /Applications/VMware Fusion.app/Contents/MacOS/VMware Fusion
