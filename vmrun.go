@@ -39,75 +39,9 @@ func NewVMRun() *VMRun {
 //    -vp <password for encrypted virtual machine>
 //    -gu <userName in guest OS>
 //    -gp <password in guest OS>
-func (v *VMRun) cmd(arg ...string) *exec.Cmd {
-	cmd := exec.Command(v.vmrunPath, "-T", "fusion")
+func (v *VMRun) Cmd(app string, arg ...string) *exec.Cmd {
+	cmd := exec.Command(v.vmrunPath, "-T", app)
 	cmd.Args = append(cmd.Args, arg...)
 
 	return cmd
-}
-
-// Start start a VM or Team.
-func (v *VMRun) Start(gui bool) error {
-	cmd := v.cmd("start")
-
-	if gui {
-		cmd.Args = append(cmd.Args, "gui")
-	} else {
-		cmd.Args = append(cmd.Args, "nogui")
-	}
-
-	return cmd.Run()
-}
-
-// Stop stop a VM or Team.
-func (v *VMRun) Stop(force bool) error {
-	cmd := v.cmd("stop")
-
-	if force {
-		cmd.Args = append(cmd.Args, "hard")
-	} else {
-		cmd.Args = append(cmd.Args, "soft")
-	}
-
-	return cmd.Run()
-}
-
-// Reset reset a VM or Team.
-func (v *VMRun) Reset(force bool) error {
-	cmd := v.cmd("reset")
-
-	if force {
-		cmd.Args = append(cmd.Args, "hard")
-	} else {
-		cmd.Args = append(cmd.Args, "soft")
-	}
-
-	return cmd.Run()
-}
-
-// Suspend Suspend a VM or Team
-func (v *VMRun) Suspend(force bool) error {
-	cmd := v.cmd("suspend")
-
-	if force {
-		cmd.Args = append(cmd.Args, "hard")
-	} else {
-		cmd.Args = append(cmd.Args, "soft")
-	}
-
-	return cmd.Run()
-}
-
-// Pause pause a VM.
-func (v *VMRun) Pause() error {
-	cmd := v.cmd("unpause")
-
-	return cmd.Run()
-}
-
-// Unpause unpause a VM.
-func (v *VMRun) Unpause() error {
-	cmd := v.cmd("unpause")
-
-	return cmd.Run()
 }
