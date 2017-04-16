@@ -19,6 +19,8 @@ func init() {
 	}
 }
 
+// VMRun return the vmrun execute binary command with the app name.
+//
 // Usage: vmrun [AUTHENTICATION-FLAGS] COMMAND [PARAMETERS]
 //
 // AUTHENTICATION-FLAGS
