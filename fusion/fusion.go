@@ -6,12 +6,11 @@ package fusion
 
 import "github.com/go-vm/vmware"
 
-const fusion = "fusion"
+const app = "fusion"
 
 // Start start a VM or Team.
 func Start(gui bool) error {
-	vmrun := vmware.NewVMRun()
-	cmd := vmrun.Cmd(fusion, "start")
+	cmd := vmware.VMRun(app, "start")
 
 	if gui {
 		cmd.Args = append(cmd.Args, "gui")
@@ -24,8 +23,7 @@ func Start(gui bool) error {
 
 // Stop stop a VM or Team.
 func Stop(force bool) error {
-	vmrun := vmware.NewVMRun()
-	cmd := vmrun.Cmd(fusion, "start")
+	cmd := vmware.VMRun(app, "stop")
 
 	if force {
 		cmd.Args = append(cmd.Args, "hard")
@@ -38,8 +36,7 @@ func Stop(force bool) error {
 
 // Reset reset a VM or Team.
 func Reset(force bool) error {
-	vmrun := vmware.NewVMRun()
-	cmd := vmrun.Cmd(fusion, "reset")
+	cmd := vmware.VMRun(app, "reset")
 
 	if force {
 		cmd.Args = append(cmd.Args, "hard")
@@ -52,8 +49,7 @@ func Reset(force bool) error {
 
 // Suspend Suspend a VM or Team
 func Suspend(force bool) error {
-	vmrun := vmware.NewVMRun()
-	cmd := vmrun.Cmd(fusion, "suspend")
+	cmd := vmware.VMRun(app, "suspend")
 
 	if force {
 		cmd.Args = append(cmd.Args, "hard")
@@ -66,16 +62,14 @@ func Suspend(force bool) error {
 
 // Pause pause a VM.
 func Pause() error {
-	vmrun := vmware.NewVMRun()
-	cmd := vmrun.Cmd(fusion, "pause")
+	cmd := vmware.VMRun(app, "pause")
 
 	return cmd.Run()
 }
 
 // Unpause unpause a VM.
 func Unpause() error {
-	vmrun := vmware.NewVMRun()
-	cmd := vmrun.Cmd(fusion, "unpause")
+	cmd := vmware.VMRun(app, "unpause")
 
 	return cmd.Run()
 }

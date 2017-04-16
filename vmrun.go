@@ -8,20 +8,14 @@ import (
 	"os/exec"
 )
 
-// VMRun represents a vmrun command.
-type VMRun struct {
-	vmrunPath string
-}
+var vmrun string
 
-// NewVMRun return the new VmRun.
-func NewVMRun() *VMRun {
-	vmrunPath, err := exec.LookPath("vmrun")
+func init() {
+	var err error
+
+	vmrun, err = exec.LookPath("vmrun")
 	if err != nil {
-		vmrunPath = VMRunPath // fallback the vmrun binary path
-	}
-
-	return &VMRun{
-		vmrunPath: vmrunPath,
+		vmrun = VMRunPath // fallback the vmrun binary path
 	}
 }
 
@@ -39,8 +33,8 @@ func NewVMRun() *VMRun {
 //    -vp <password for encrypted virtual machine>
 //    -gu <userName in guest OS>
 //    -gp <password in guest OS>
-func (v *VMRun) Cmd(app string, arg ...string) *exec.Cmd {
-	cmd := exec.Command(v.vmrunPath, "-T", app)
+func VMRun(app string, arg ...string) *exec.Cmd {
+	cmd := exec.Command(vmrun, "-T", app)
 	cmd.Args = append(cmd.Args, arg...)
 
 	return cmd
