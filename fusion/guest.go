@@ -94,12 +94,6 @@ import (
 // getGuestIPAddress        Path to vmx file     Gets the IP address of the guest
 //                          [-wait]
 
-// Guest represents a guest login data.
-type Guest struct {
-	User string
-	Pass string
-}
-
 // RunProgramInGuestConfig represents a runProgramInGuest command flags.
 type RunProgramInGuestConfig int
 
@@ -116,8 +110,8 @@ const (
 )
 
 // RunProgramInGuest run a program in Guest OS.
-func RunProgramInGuest(vmx string, guest Guest, config RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
-	args := []string{"-gu", guest.User, "-gp", guest.Pass, "runProgramInGuest", vmx}
+func RunProgramInGuest(vmx string, auth Authentication, config RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
+	args := []string{"-gu", auth.User, "-gp", auth.Pass, "runProgramInGuest", vmx}
 
 	if config&NoWait > 0 {
 		args = append(args, "-noWait")
@@ -140,8 +134,8 @@ func RunProgramInGuest(vmx string, guest Guest, config RunProgramInGuestConfig, 
 }
 
 // FileExistsInGuest check if a file exists in Guest OS.
-func FileExistsInGuest(vmx string, guest Guest, filename string) bool {
-	if _, err := vmware.VMRun(app, "-gu", guest.User, "-gp", guest.Pass, "fileExistsInGuest", vmx, filename); err != nil {
+func FileExistsInGuest(vmx string, auth Authentication, filename string) bool {
+	if _, err := vmware.VMRun(app, "-gu", auth.User, "-gp", auth.Pass, "fileExistsInGuest", vmx, filename); err != nil {
 		return false
 	}
 
@@ -149,8 +143,8 @@ func FileExistsInGuest(vmx string, guest Guest, filename string) bool {
 }
 
 // DirectoryExistsInGuest check if a directory exists in Guest OS.
-func DirectoryExistsInGuest(vmx string, guest Guest, dir string) bool {
-	if _, err := vmware.VMRun(app, "-gu", guest.User, "-gp", guest.Pass, "directoryExistsInGuest", vmx, dir); err != nil {
+func DirectoryExistsInGuest(vmx string, auth Authentication, dir string) bool {
+	if _, err := vmware.VMRun(app, "-gu", auth.User, "-gp", auth.Pass, "directoryExistsInGuest", vmx, dir); err != nil {
 		return false
 	}
 
