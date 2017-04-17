@@ -13,6 +13,12 @@ import (
 
 const app = "fusion"
 
+// Guest represents a guest login data.
+type Guest struct {
+	User string
+	Pass string
+}
+
 // Start start a VM or Team.
 func Start(vmx string, gui bool) error {
 	flag := "nogui"
@@ -147,6 +153,38 @@ func DeleteSnapshot(vmx, snapshotName string, deleteChildren bool) error {
 // RevertToSnapshot set VM state to a snapshot.
 func RevertToSnapshot(vmx, snapshotName string) error {
 	if _, err := vmware.VMRun(app, "revertToSnapshot", vmx, snapshotName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+type RunProgramInGuestConfig int
+
+const (
+	NoWait RunProgramInGuestConfig = 1 << iota
+	ActiveWindow
+	Interactive
+)
+
+// RunProgramInGuest run a program in Guest OS.
+func RunProgramInGuest(vmx string, guest Guest, config RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
+	args := []string{"-gu", guest.User, "-gp", guest.Pass, "runProgramInGuest", vmx}
+
+	if config&NoWait > 0 {
+		args = append(args, "-noWait")
+	}
+	if config&ActiveWindow > 0 {
+		args = append(args, "-activeWindow")
+	}
+	if config&Interactive > 0 {
+		args = append(args, "-interactive")
+	}
+
+	args = append(args, cmdPath)
+	args = append(args, cmdArgs...)
+
+	if _, err := vmware.VMRun(app, args...); err != nil {
 		return err
 	}
 
