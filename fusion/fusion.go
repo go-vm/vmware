@@ -47,7 +47,7 @@ func Reset(vmwarevm string, force bool) error {
 	return cmd.Run()
 }
 
-// Suspend Suspend a VM or Team
+// Suspend Suspend a VM or Team.
 func Suspend(vmwarevm string, force bool) error {
 	cmd := vmware.VMRun(app, "suspend", vmwarevm)
 
