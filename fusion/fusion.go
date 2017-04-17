@@ -125,3 +125,70 @@ func Unpause(vmx string) error {
 
 	return nil
 }
+
+// ListSnapshots list all snapshots in a VM.
+func ListSnapshots(vmx string) error {
+	cmd := vmware.VMRun(app, "listSnapshots", vmx)
+
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+	if runErr := cmd.Run(); runErr != nil {
+		if err := runErr.(*exec.ExitError); err != nil {
+			return fmt.Errorf(stdout.String())
+		}
+		return runErr
+	}
+
+	return nil
+}
+
+// Snapshot create a snapshot of a VM.
+func Snapshot(vmx, snapshotName string) error {
+	cmd := vmware.VMRun(app, "snapshot", vmx, snapshotName)
+
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+	if runErr := cmd.Run(); runErr != nil {
+		if err := runErr.(*exec.ExitError); err != nil {
+			return fmt.Errorf(stdout.String())
+		}
+		return runErr
+	}
+
+	return nil
+}
+
+// DeleteSnapshot remove a snapshot from a VM.
+func DeleteSnapshot(vmx, snapshotName string, deleteChildren bool) error {
+	cmd := vmware.VMRun(app, "deleteSnapshot", vmx, snapshotName)
+	if deleteChildren {
+		cmd.Args = append(cmd.Args, "andDeleteChildren")
+	}
+
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+	if runErr := cmd.Run(); runErr != nil {
+		if err := runErr.(*exec.ExitError); err != nil {
+			return fmt.Errorf(stdout.String())
+		}
+		return runErr
+	}
+
+	return nil
+}
+
+// RevertToSnapshot set VM state to a snapshot.
+func RevertToSnapshot(vmx, snapshotName string) error {
+	cmd := vmware.VMRun(app, "revertToSnapshot", vmx, snapshotName)
+
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+	if runErr := cmd.Run(); runErr != nil {
+		if err := runErr.(*exec.ExitError); err != nil {
+			return fmt.Errorf(stdout.String())
+		}
+		return runErr
+	}
+
+	return nil
+}
