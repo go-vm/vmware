@@ -5,6 +5,9 @@
 package fusion
 
 import (
+	"regexp"
+	"strings"
+
 	"github.com/go-vm/vmware"
 )
 
@@ -17,7 +20,11 @@ func Start(vmx string, gui bool) error {
 		flag = "gui"
 	}
 
-	return vmware.VMRun(app, "start", vmx, flag)
+	if _, err := vmware.VMRun(app, "start", vmx, flag); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Stop stop a VM or Team.
@@ -27,7 +34,11 @@ func Stop(vmx string, hard bool) error {
 		flag = "hard"
 	}
 
-	return vmware.VMRun(app, "stop", vmx, flag)
+	if _, err := vmware.VMRun(app, "stop", vmx, flag); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Reset reset a VM or Team.
@@ -37,7 +48,11 @@ func Reset(vmx string, hard bool) error {
 		flag = "hard"
 	}
 
-	return vmware.VMRun(app, "reset", vmx, flag)
+	if _, err := vmware.VMRun(app, "reset", vmx, flag); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Suspend Suspend a VM or Team.
@@ -47,38 +62,78 @@ func Suspend(vmx string, hard bool) error {
 		flag = "hard"
 	}
 
-	return vmware.VMRun(app, "suspend", vmx, flag)
+	if _, err := vmware.VMRun(app, "suspend", vmx, flag); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Pause pause a VM.
 func Pause(vmx string) error {
-	return vmware.VMRun(app, "pause", vmx)
+	if _, err := vmware.VMRun(app, "pause", vmx); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Unpause unpause a VM.
 func Unpause(vmx string) error {
-	return vmware.VMRun(app, "unpause", vmx)
+	if _, err := vmware.VMRun(app, "unpause", vmx); err != nil {
+		return err
+	}
+
+	return nil
 }
 
+var listSnapshotsRe = regexp.MustCompile(`[^Total snapshots: \d](\w+)`)
+
 // ListSnapshots list all snapshots in a VM.
-func ListSnapshots(vmx string) error {
-	return vmware.VMRun(app, "listSnapshots", vmx)
+func ListSnapshots(vmx string) ([]string, int, error) {
+	stdout, err := vmware.VMRun(app, "listSnapshots", vmx)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	list := listSnapshotsRe.FindAllString(stdout, -1)
+	// TODO: need re-append with TrimSpace?
+	var snapshotList []string
+	for _, snapshotName := range list {
+		snapshotList = append(snapshotList, strings.TrimSpace(snapshotName))
+	}
+
+	return snapshotList, len(snapshotList), nil
 }
 
 // Snapshot create a snapshot of a VM.
 func Snapshot(vmx, snapshotName string) error {
-	return vmware.VMRun(app, "snapshot", vmx, snapshotName)
+	if _, err := vmware.VMRun(app, "snapshot", vmx, snapshotName); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // DeleteSnapshot remove a snapshot from a VM.
 func DeleteSnapshot(vmx, snapshotName string, deleteChildren bool) error {
+	args := []string{"deleteSnapshot", vmx, snapshotName}
 	if deleteChildren {
-		return vmware.VMRun(app, "deleteSnapshot", vmx, snapshotName, "andDeleteChildren")
+		args = append(args, "andDeleteChildren")
 	}
-	return vmware.VMRun(app, "deleteSnapshot", vmx, snapshotName)
+
+	if _, err := vmware.VMRun(app, args...); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // RevertToSnapshot set VM state to a snapshot.
 func RevertToSnapshot(vmx, snapshotName string) error {
-	return vmware.VMRun(app, "revertToSnapshot", vmx, snapshotName)
+	if _, err := vmware.VMRun(app, "revertToSnapshot", vmx, snapshotName); err != nil {
+		return err
+	}
+
+	return nil
 }
