@@ -14,11 +14,18 @@ type Guest struct {
 	Pass string
 }
 
+// RunProgramInGuestConfig represents a runProgramInGuest command flags.
 type RunProgramInGuestConfig int
 
 const (
+	// NoWait returns a prompt immediately after the program starts in the guest, rather than waiting for it to finish.
+	// This option is useful for interactive programs.
 	NoWait RunProgramInGuestConfig = 1 << iota
+	// ActiveWindow ensures that the Windows GUI is visible, not minimized.
+	// It has no effect on Linux.
 	ActiveWindow
+	// Interactive forces interactive guest login.
+	// It is useful for Vista and Windows 7 guests to make the program visible in the console window.
 	Interactive
 )
 
