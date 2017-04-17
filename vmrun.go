@@ -37,7 +37,7 @@ func init() {
 //    -vp <password for encrypted virtual machine>
 //    -gu <userName in guest OS>
 //    -gp <password in guest OS>
-func VMRun(app string, arg ...string) error {
+func VMRun(app string, arg ...string) (string, error) {
 	cmd := exec.Command(vmrun, "-T", app)
 	cmd.Args = append(cmd.Args, arg...)
 
@@ -45,10 +45,10 @@ func VMRun(app string, arg ...string) error {
 	cmd.Stdout = &stdout
 	if runErr := cmd.Run(); runErr != nil {
 		if err := runErr.(*exec.ExitError); err != nil {
-			return fmt.Errorf(stdout.String())
+			return "", fmt.Errorf(stdout.String())
 		}
-		return runErr
+		return "", runErr
 	}
 
-	return nil
+	return stdout.String(), nil
 }
