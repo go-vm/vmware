@@ -21,7 +21,8 @@ func init() {
 	}
 }
 
-// VMRun return the vmrun execute binary command with the app name.
+// VMRun run the vmrun command with the app name and args.
+// Return the stdout result and cmd error.
 //
 // Usage: vmrun [AUTHENTICATION-FLAGS] COMMAND [PARAMETERS]
 //
