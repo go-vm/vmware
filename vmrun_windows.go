@@ -15,7 +15,7 @@ import (
 var VMRunPath string
 
 // VMwareProducts define VMware products those contain vmrun.exe in Windows.
-var VMwareProducts = [3]string{"VMware Workstation", "VMware Player", "VMware VIX"}
+var VMwareProducts = [...]string{"VMware Workstation", "VMware Player", "VMware VIX"}
 
 func init() {
 	for _, products := range VMwareProducts {
