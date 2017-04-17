@@ -15,13 +15,13 @@ import (
 const app = "fusion"
 
 // Start start a VM or Team.
-func Start(vmwarevm string, gui bool) error {
+func Start(vmx string, gui bool) error {
 	flag := "nogui"
 	if gui {
 		flag = "gui"
 	}
 
-	cmd := vmware.VMRun(app, "start", vmwarevm, flag)
+	cmd := vmware.VMRun(app, "start", vmx, flag)
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
 	if runErr := cmd.Run(); runErr != nil {
@@ -35,13 +35,13 @@ func Start(vmwarevm string, gui bool) error {
 }
 
 // Stop stop a VM or Team.
-func Stop(vmwarevm string, hard bool) error {
+func Stop(vmx string, hard bool) error {
 	flag := "soft"
 	if hard {
 		flag = "hard"
 	}
 
-	cmd := vmware.VMRun(app, "stop", vmwarevm, flag)
+	cmd := vmware.VMRun(app, "stop", vmx, flag)
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
 	if runErr := cmd.Run(); runErr != nil {
@@ -55,13 +55,13 @@ func Stop(vmwarevm string, hard bool) error {
 }
 
 // Reset reset a VM or Team.
-func Reset(vmwarevm string, hard bool) error {
+func Reset(vmx string, hard bool) error {
 	flag := "soft"
 	if hard {
 		flag = "hard"
 	}
 
-	cmd := vmware.VMRun(app, "reset", vmwarevm, flag)
+	cmd := vmware.VMRun(app, "reset", vmx, flag)
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
 	if runErr := cmd.Run(); runErr != nil {
@@ -75,13 +75,13 @@ func Reset(vmwarevm string, hard bool) error {
 }
 
 // Suspend Suspend a VM or Team.
-func Suspend(vmwarevm string, hard bool) error {
+func Suspend(vmx string, hard bool) error {
 	flag := "soft"
 	if hard {
 		flag = "hard"
 	}
 
-	cmd := vmware.VMRun(app, "suspend", vmwarevm, flag)
+	cmd := vmware.VMRun(app, "suspend", vmx, flag)
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
 	if runErr := cmd.Run(); runErr != nil {
@@ -95,8 +95,8 @@ func Suspend(vmwarevm string, hard bool) error {
 }
 
 // Pause pause a VM.
-func Pause(vmwarevm string) error {
-	cmd := vmware.VMRun(app, "pause", vmwarevm)
+func Pause(vmx string) error {
+	cmd := vmware.VMRun(app, "pause", vmx)
 
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
@@ -111,8 +111,8 @@ func Pause(vmwarevm string) error {
 }
 
 // Unpause unpause a VM.
-func Unpause(vmwarevm string) error {
-	cmd := vmware.VMRun(app, "unpause", vmwarevm)
+func Unpause(vmx string) error {
+	cmd := vmware.VMRun(app, "unpause", vmx)
 
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
