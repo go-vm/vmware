@@ -16,91 +16,79 @@ const app = "fusion"
 
 // Start start a VM or Team.
 func Start(vmwarevm string, gui bool) error {
-	cmd := vmware.VMRun(app, "start", vmwarevm)
-
+	flag := "nogui"
 	if gui {
-		cmd.Args = append(cmd.Args, "gui")
-	} else {
-		cmd.Args = append(cmd.Args, "nogui")
+		flag = "gui"
 	}
 
+	cmd := vmware.VMRun(app, "start", vmwarevm, flag)
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
-
-	if err := cmd.Run(); err != nil {
-		if e := err.(*exec.ExitError); e != nil {
+	if runErr := cmd.Run(); runErr != nil {
+		if err := runErr.(*exec.ExitError); err != nil {
 			return fmt.Errorf(stdout.String())
 		}
-		return err
+		return runErr
 	}
 
 	return nil
 }
 
 // Stop stop a VM or Team.
-func Stop(vmwarevm string, force bool) error {
-	cmd := vmware.VMRun(app, "stop", vmwarevm)
-
-	if force {
-		cmd.Args = append(cmd.Args, "hard")
-	} else {
-		cmd.Args = append(cmd.Args, "soft")
+func Stop(vmwarevm string, hard bool) error {
+	flag := "soft"
+	if hard {
+		flag = "hard"
 	}
 
+	cmd := vmware.VMRun(app, "stop", vmwarevm, flag)
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
-
-	if err := cmd.Run(); err != nil {
-		if e := err.(*exec.ExitError); e != nil {
+	if runErr := cmd.Run(); runErr != nil {
+		if err := runErr.(*exec.ExitError); err != nil {
 			return fmt.Errorf(stdout.String())
 		}
-		return err
+		return runErr
 	}
 
 	return nil
 }
 
 // Reset reset a VM or Team.
-func Reset(vmwarevm string, force bool) error {
-	cmd := vmware.VMRun(app, "reset", vmwarevm)
-
-	if force {
-		cmd.Args = append(cmd.Args, "hard")
-	} else {
-		cmd.Args = append(cmd.Args, "soft")
+func Reset(vmwarevm string, hard bool) error {
+	flag := "soft"
+	if hard {
+		flag = "hard"
 	}
 
+	cmd := vmware.VMRun(app, "reset", vmwarevm, flag)
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
-
-	if err := cmd.Run(); err != nil {
-		if e := err.(*exec.ExitError); e != nil {
+	if runErr := cmd.Run(); runErr != nil {
+		if err := runErr.(*exec.ExitError); err != nil {
 			return fmt.Errorf(stdout.String())
 		}
-		return err
+		return runErr
 	}
 
 	return nil
 }
 
 // Suspend Suspend a VM or Team.
-func Suspend(vmwarevm string, force bool) error {
-	cmd := vmware.VMRun(app, "suspend", vmwarevm)
-
-	if force {
-		cmd.Args = append(cmd.Args, "hard")
-	} else {
-		cmd.Args = append(cmd.Args, "soft")
+func Suspend(vmwarevm string, hard bool) error {
+	flag := "soft"
+	if hard {
+		flag = "hard"
 	}
 
+	cmd := vmware.VMRun(app, "suspend", vmwarevm, flag)
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
-
-	if err := cmd.Run(); err != nil {
-		if e := err.(*exec.ExitError); e != nil {
+	if runErr := cmd.Run(); runErr != nil {
+		if err := runErr.(*exec.ExitError); err != nil {
 			return fmt.Errorf(stdout.String())
 		}
-		return err
+		return runErr
 	}
 
 	return nil
@@ -112,12 +100,11 @@ func Pause(vmwarevm string) error {
 
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
-
-	if err := cmd.Run(); err != nil {
-		if e := err.(*exec.ExitError); e != nil {
+	if runErr := cmd.Run(); runErr != nil {
+		if err := runErr.(*exec.ExitError); err != nil {
 			return fmt.Errorf(stdout.String())
 		}
-		return err
+		return runErr
 	}
 
 	return nil
@@ -129,12 +116,11 @@ func Unpause(vmwarevm string) error {
 
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
-
-	if err := cmd.Run(); err != nil {
-		if e := err.(*exec.ExitError); e != nil {
+	if runErr := cmd.Run(); runErr != nil {
+		if err := runErr.(*exec.ExitError); err != nil {
 			return fmt.Errorf(stdout.String())
 		}
-		return err
+		return runErr
 	}
 
 	return nil
