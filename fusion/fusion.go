@@ -65,6 +65,11 @@ func Reset(vmx string, hard bool) error {
 	return nil
 }
 
+// Restart restart a VM uses wrap of reset command with soft.
+func Restart(vmx string) error {
+	return Reset(vmx, false)
+}
+
 // Suspend Suspend a VM or Team.
 func Suspend(vmx string, hard bool) error {
 	flag := "soft"
