@@ -6,7 +6,7 @@ package main
 
 import "github.com/go-vm/vmware/fusion"
 
-const vmwarevmPath = "/Volumes/APFS/VirtualMachine/macOS-10.12.vmwarevm"
+const vmwarevmPath = "/Volumes/APFS/VirtualMachine/macOS-10.12.vmwarevm/macOS-10.12.vmx"
 
 func main() {
 	if err := fusion.Start(vmwarevmPath, false); err != nil {
