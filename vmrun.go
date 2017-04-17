@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"fmt"
 	"os/exec"
+	"syscall"
 )
 
 var vmrun string
@@ -39,6 +40,10 @@ func init() {
 //    -gu <userName in guest OS>
 //    -gp <password in guest OS>
 func VMRun(app string, arg ...string) (string, error) {
+	// vmrun with nogui on VMware Fusion through at least 8.0.1 doesn't work right
+	// if the umask is set to not allow world-readable permissions
+	_ = syscall.Umask(022)
+
 	cmd := exec.Command(vmrun, "-T", app)
 	cmd.Args = append(cmd.Args, arg...)
 
