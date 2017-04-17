@@ -1,5 +1,7 @@
 # fusion
 
+A package fusion implements a vmrun command wrapper of managing the VMware Fusion application.
+
 | **godoc.org**                      |
 |:----------------------------------:|
 | [![godoc.org][godoc-badge]][godoc] |
