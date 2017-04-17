@@ -11,6 +11,21 @@ import (
 	"github.com/go-vm/vmware"
 )
 
+// SNAPSHOT COMMANDS        PARAMETERS           DESCRIPTION
+// -----------------        ----------           -----------
+// listSnapshots            Path to vmx file     List all snapshots in a VM
+//                          [showTree]
+//
+// snapshot                 Path to vmx file     Create a snapshot of a VM
+//                          Snapshot name
+//
+// deleteSnapshot           Path to vmx file     Remove a snapshot from a VM
+//                          Snapshot name
+//                          [andDeleteChildren]
+//
+// revertToSnapshot         Path to vmx file     Set VM state to a snapshot
+//                          Snapshot name
+
 var listSnapshotsRe = regexp.MustCompile(`[^Total snapshots: \d](\w+)`)
 
 // ListSnapshots list all snapshots in a VM.
