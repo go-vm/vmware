@@ -4,7 +4,13 @@
 
 package fusion
 
-import "github.com/go-vm/vmware"
+import (
+	"bytes"
+	"fmt"
+	"os/exec"
+
+	"github.com/go-vm/vmware"
+)
 
 const app = "fusion"
 
@@ -18,7 +24,17 @@ func Start(vmwarevm string, gui bool) error {
 		cmd.Args = append(cmd.Args, "nogui")
 	}
 
-	return cmd.Run()
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+
+	if err := cmd.Run(); err != nil {
+		if e := err.(*exec.ExitError); e != nil {
+			return fmt.Errorf(stdout.String())
+		}
+		return err
+	}
+
+	return nil
 }
 
 // Stop stop a VM or Team.
@@ -31,7 +47,17 @@ func Stop(vmwarevm string, force bool) error {
 		cmd.Args = append(cmd.Args, "soft")
 	}
 
-	return cmd.Run()
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+
+	if err := cmd.Run(); err != nil {
+		if e := err.(*exec.ExitError); e != nil {
+			return fmt.Errorf(stdout.String())
+		}
+		return err
+	}
+
+	return nil
 }
 
 // Reset reset a VM or Team.
@@ -44,7 +70,17 @@ func Reset(vmwarevm string, force bool) error {
 		cmd.Args = append(cmd.Args, "soft")
 	}
 
-	return cmd.Run()
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+
+	if err := cmd.Run(); err != nil {
+		if e := err.(*exec.ExitError); e != nil {
+			return fmt.Errorf(stdout.String())
+		}
+		return err
+	}
+
+	return nil
 }
 
 // Suspend Suspend a VM or Team.
@@ -57,19 +93,49 @@ func Suspend(vmwarevm string, force bool) error {
 		cmd.Args = append(cmd.Args, "soft")
 	}
 
-	return cmd.Run()
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+
+	if err := cmd.Run(); err != nil {
+		if e := err.(*exec.ExitError); e != nil {
+			return fmt.Errorf(stdout.String())
+		}
+		return err
+	}
+
+	return nil
 }
 
 // Pause pause a VM.
 func Pause(vmwarevm string) error {
 	cmd := vmware.VMRun(app, "pause", vmwarevm)
 
-	return cmd.Run()
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+
+	if err := cmd.Run(); err != nil {
+		if e := err.(*exec.ExitError); e != nil {
+			return fmt.Errorf(stdout.String())
+		}
+		return err
+	}
+
+	return nil
 }
 
 // Unpause unpause a VM.
 func Unpause(vmwarevm string) error {
 	cmd := vmware.VMRun(app, "unpause", vmwarevm)
 
-	return cmd.Run()
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+
+	if err := cmd.Run(); err != nil {
+		if e := err.(*exec.ExitError); e != nil {
+			return fmt.Errorf(stdout.String())
+		}
+		return err
+	}
+
+	return nil
 }
