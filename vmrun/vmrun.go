@@ -305,8 +305,8 @@ const (
 )
 
 // RunProgramInGuest run a program in Guest OS.
-func RunProgramInGuest(app, vmx string, auth Auth, config RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
-	args := []string{"-gu", auth.Username, "-gp", auth.Password, "runProgramInGuest", vmx}
+func RunProgramInGuest(app, vmx string, username, password string, config RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
+	args := []string{"-gu", username, "-gp", password, "runProgramInGuest", vmx}
 
 	if config&NoWait > 0 {
 		args = append(args, "-noWait")
@@ -329,8 +329,8 @@ func RunProgramInGuest(app, vmx string, auth Auth, config RunProgramInGuestConfi
 }
 
 // FileExistsInGuest check if a file exists in Guest OS.
-func FileExistsInGuest(app, vmx string, auth Auth, filename string) bool {
-	if _, err := vmrun(app, "-gu", auth.Username, "-gp", auth.Password, "fileExistsInGuest", vmx, filename); err != nil {
+func FileExistsInGuest(app, vmx string, username, password string, filename string) bool {
+	if _, err := vmrun(app, "-gu", username, "-gp", password, "fileExistsInGuest", vmx, filename); err != nil {
 		return false
 	}
 
@@ -338,8 +338,8 @@ func FileExistsInGuest(app, vmx string, auth Auth, filename string) bool {
 }
 
 // DirectoryExistsInGuest check if a directory exists in Guest OS.
-func DirectoryExistsInGuest(app, vmx string, auth Auth, dir string) bool {
-	if _, err := vmrun(app, "-gu", auth.Username, "-gp", auth.Password, "directoryExistsInGuest", vmx, dir); err != nil {
+func DirectoryExistsInGuest(app, vmx string, username, password string, dir string) bool {
+	if _, err := vmrun(app, "-gu", username, "-gp", password, "directoryExistsInGuest", vmx, dir); err != nil {
 		return false
 	}
 
