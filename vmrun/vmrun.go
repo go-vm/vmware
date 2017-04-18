@@ -396,7 +396,7 @@ type ListProcessesInGuestInfo struct {
 
 var listProcessesInGuestRe = regexp.MustCompile(`pid=(\d+), owner=(\w+), cmd=([[:print:]]+)`)
 
-// ListProcessesInGuest List running processes in Guest OS
+// ListProcessesInGuest List running processes in Guest OS.
 func ListProcessesInGuest(app, vmx, username, password string) ([]ListProcessesInGuestInfo, error) {
 	stdout, err := vmrun(app, "-gu", username, "-gp", password, "listprocessesinguest", vmx)
 	if err != nil {
