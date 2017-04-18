@@ -185,3 +185,8 @@ func (f *Fusion) WriteVariable(mode vmrun.VariableMode, env, value string) error
 func (f *Fusion) ReadVariable(mode vmrun.VariableMode, env string) (string, error) {
 	return vmrun.ReadVariable(fusionApp, f.vmx, f.username, f.password, mode, env)
 }
+
+// GetGuestIPAddress gets the IP address of the guest.
+func (f *Fusion) GetGuestIPAddress(wait bool) (string, error) {
+	return vmrun.GetGuestIPAddress(fusionApp, f.vmx, wait)
+}

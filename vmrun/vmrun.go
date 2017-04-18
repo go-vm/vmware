@@ -600,3 +600,18 @@ func ReadVariable(app, vmx, username, password string, mode VariableMode, env st
 
 	return strings.TrimSpace(stdout), nil
 }
+
+// GetGuestIPAddress gets the IP address of the guest.
+func GetGuestIPAddress(app, vmx string, wait bool) (string, error) {
+	args := []string{"getGuestIPAddress", vmx}
+	if wait {
+		args = append(args, "-wait")
+	}
+
+	stdout, err := vmrun(app, args...)
+	if err != nil {
+		return "", err
+	}
+
+	return stdout, nil
+}
