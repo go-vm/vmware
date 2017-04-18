@@ -590,3 +590,13 @@ func WriteVariable(app, vmx, username, password string, mode VariableMode, env, 
 
 	return nil
 }
+
+// ReadVariable read a variable in the VM state.
+func ReadVariable(app, vmx, username, password string, mode VariableMode, env string) (string, error) {
+	stdout, err := vmrun(app, "-gu", username, "-gp", password, "readVariable", vmx, mode.String(), env)
+	if err != nil {
+		return "", err
+	}
+
+	return strings.TrimSpace(stdout), nil
+}

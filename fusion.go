@@ -180,3 +180,8 @@ func (f *Fusion) CaptureScreen(dst string) error {
 func (f *Fusion) WriteVariable(mode vmrun.VariableMode, env, value string) error {
 	return vmrun.WriteVariable(fusionApp, f.vmx, f.username, f.password, mode, env, value)
 }
+
+// ReadVariable read a variable in the VM state.
+func (f *Fusion) ReadVariable(mode vmrun.VariableMode, env string) (string, error) {
+	return vmrun.ReadVariable(fusionApp, f.vmx, f.username, f.password, mode, env)
+}
