@@ -226,13 +226,13 @@ func RevertToSnapshot(app, vmx, snapshotName string) error {
 //                          Script text
 //
 // deleteFileInGuest        Path to vmx file     Delete a file in Guest OS
-// Path in guest
+//                          Path in guest
 //
 // createDirectoryInGuest   Path to vmx file     Create a directory in Guest OS
-// Directory path in guest
+//                          Directory path in guest
 //
 // deleteDirectoryInGuest   Path to vmx file     Delete a directory in Guest OS
-// Directory path in guest
+//                          Directory path in guest
 //
 // CreateTempfileInGuest    Path to vmx file     Create a temporary file in Guest OS
 //
@@ -240,11 +240,13 @@ func RevertToSnapshot(app, vmx, snapshotName string) error {
 //                          Directory path in guest
 //
 // CopyFileFromHostToGuest  Path to vmx file     Copy a file from host OS to guest OS
-// Path on host             Path in guest
+//                          Path on host
+//                          Path in guest
 //
 //
 // CopyFileFromGuestToHost  Path to vmx file     Copy a file from guest OS to host OS
-// Path in guest            Path on host
+//                          Path in guest
+//                          Path on host
 //
 //
 // renameFileInGuest        Path to vmx file     Rename a file in Guest OS
@@ -252,7 +254,7 @@ func RevertToSnapshot(app, vmx, snapshotName string) error {
 //                          New name
 //
 // captureScreen            Path to vmx file     Capture the screen of the VM to a local file
-// Path on host
+//                          Path on host
 //
 // writeVariable            Path to vmx file     Write a variable in the VM state
 //                          [runtimeConfig|guestEnv|guestVar]
