@@ -7,10 +7,15 @@ package vmwareutil
 import (
 	"os/exec"
 	"path/filepath"
+	"runtime"
 )
 
 // LookPath detect the vmware command binary path.
 func LookPath(cmd string) string {
+	if runtime.GOOS == "windows" {
+		cmd = cmd + ".exe"
+	}
+
 	if path, err := exec.LookPath(cmd); err == nil {
 		return path
 	}
