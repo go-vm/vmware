@@ -175,3 +175,8 @@ func (f *Fusion) RenameFileInGuest(src, dst string) error {
 func (f *Fusion) CaptureScreen(dst string) error {
 	return vmrun.CaptureScreen(fusionApp, f.vmx, f.username, f.password, dst)
 }
+
+// WriteVariable write a variable in the VM state.
+func (f *Fusion) WriteVariable(mode vmrun.VariableMode, env, value string) error {
+	return vmrun.WriteVariable(fusionApp, f.vmx, f.username, f.password, mode, env, value)
+}

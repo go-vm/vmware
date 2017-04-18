@@ -555,3 +555,38 @@ func CaptureScreen(app, vmx, username, password, dst string) error {
 
 	return nil
 }
+
+// VariableMode represents a writeVariable or readVariable command mode.
+type VariableMode int
+
+const (
+	// RuntimeConfig runtime‐only value that provides a simple way to pass runtime values in and out of the guest.
+	RuntimeConfig VariableMode = 1 << iota
+	// GuestEnv non‐persistent guest variable.
+	GuestEnv
+	// GuestVar runtime configuration parameter as stored in the .vmx file, or an environment variable.
+	GuestVar
+)
+
+// String implements a fmt.Stringer interface.
+func (v VariableMode) String() string {
+	switch v {
+	case RuntimeConfig:
+		return "runtimeConfig"
+	case GuestEnv:
+		return "guestEnv"
+	case GuestVar:
+		return "guestVar"
+	default:
+		return ""
+	}
+}
+
+// WriteVariable write a variable in the VM state.
+func WriteVariable(app, vmx, username, password string, mode VariableMode, env, value string) error {
+	if _, err := vmrun(app, "-gu", username, "-gp", password, "writeVariable", vmx, mode.String(), env, value); err != nil {
+		return err
+	}
+
+	return nil
+}
