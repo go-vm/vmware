@@ -150,3 +150,16 @@ func DirectoryExistsInGuest(vmx string, auth Auth, dir string) bool {
 
 	return true
 }
+
+// SetSharedFolderState modify a Host-Guest shared folder.
+func SetSharedFolderState(vmx string, auth Auth, shareName, hostPath string, writable bool) bool {
+	flag := "readonly"
+	if writable {
+		flag = "writable"
+	}
+	if _, err := vmware.VMRun(app, "-gu", auth.Username, "-gp", auth.Password, "setSharedFolderState", vmx, shareName, hostPath, flag); err != nil {
+		return false
+	}
+
+	return true
+}
