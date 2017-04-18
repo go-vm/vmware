@@ -14,13 +14,24 @@ import (
 const vmxPath = "/Volumes/APFS/VirtualMachine/macOS-10.12.vmwarevm/macOS-10.12.vmx"
 
 func main() {
-	fusion := vmware.NewFusion(vmxPath)
+	fusion := vmware.NewFusion(vmxPath, "darwinstrap", "darwinstrap")
+
+	exist := fusion.DirectoryExistsInGuest("/Volumes/VMware Tools")
+	log.Printf("exist: %T => %+v\n", exist, exist)
 
 	if err := fusion.Start(false); err != nil {
 		panic(err.Error())
 	}
 
-	if err := fusion.RunProgramInGuest("darwinstrap", "darwinstrap", vmrun.ActiveWindow, "/usr/bin/env"); err != nil {
+	if _, err := fusion.ListProcessesInGuest(); err != nil {
+		panic(err.Error())
+	}
+
+	if err := fusion.RunProgramInGuest(vmrun.ActiveWindow, "/usr/bin/env"); err != nil {
+		panic(err.Error())
+	}
+
+	if err := fusion.DisableSharedFolders(false); err != nil {
 		panic(err.Error())
 	}
 
