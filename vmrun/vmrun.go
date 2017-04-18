@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"fmt"
 	"os/exec"
+	"path/filepath"
 	"regexp"
 	"strconv"
 	"strings"
@@ -458,4 +459,14 @@ func DeleteFileInGuest(app, vmx, username, password, filename string) error {
 	}
 
 	return nil
+}
+
+// CreateTempfileInGuest create a temporary file in Guest OS.
+func CreateTempfileInGuest(app, vmx, username, password string) (string, error) {
+	stdout, err := vmrun(app, "-gu", username, "-gp", password, "CreateTempfileInGuest", vmx)
+	if err != nil {
+		return "", err
+	}
+
+	return filepath.Clean(stdout), nil
 }

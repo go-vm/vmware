@@ -145,3 +145,8 @@ func (f *Fusion) RunScriptInGuest(config vmrun.RunInGuestConfig, interpreter, sc
 func (f *Fusion) DeleteFileInGuest(filename string) error {
 	return vmrun.DeleteFileInGuest(fusionApp, f.vmx, f.username, f.password, filename)
 }
+
+// CreateTempfileInGuest create a temporary file in Guest OS.
+func (f *Fusion) CreateTempfileInGuest() (string, error) {
+	return vmrun.CreateTempfileInGuest(fusionApp, f.vmx, f.username, f.password)
+}
