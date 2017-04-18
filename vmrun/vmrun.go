@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os/exec"
 	"regexp"
+	"strconv"
 	"strings"
 	"syscall"
 
@@ -414,4 +415,13 @@ func ListProcessesInGuest(app, vmx, username, password string) ([]ListProcessesI
 	}
 
 	return list, nil
+}
+
+// KillProcessInGuest kill a process in Guest OS.
+func KillProcessInGuest(app, vmx, username, password string, pid int) error {
+	if _, err := vmrun(app, "-gu", username, "-gp", password, "killprocessinguest", vmx, strconv.Itoa(pid)); err != nil {
+		return err
+	}
+
+	return nil
 }

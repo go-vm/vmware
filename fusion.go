@@ -125,3 +125,7 @@ func (f *Fusion) DisableSharedFolders(runtime bool) error {
 func (f *Fusion) ListProcessesInGuest(username, password string) ([]vmrun.ListProcessesInGuestInfo, error) {
 	return vmrun.ListProcessesInGuest(fusionApp, f.vmx, username, password)
 }
+
+func (f *Fusion) KillProcessInGuest(username, password string, pid int) error {
+	return vmrun.KillProcessInGuest(fusionApp, f.vmx, username, password, pid)
+}
