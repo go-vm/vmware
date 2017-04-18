@@ -98,7 +98,7 @@ func (f *Fusion) DirectoryExistsInGuest(username, password string, dir string) b
 }
 
 // SetSharedFolderState modify a Host-Guest shared folder.
-func (f *Fusion) SetSharedFolderState(shareName, hostPath string, writable bool) bool {
+func (f *Fusion) SetSharedFolderState(shareName, hostPath string, writable bool) error {
 	return vmrun.SetSharedFolderState(fusionApp, f.vmx, shareName, hostPath, writable)
 }
 

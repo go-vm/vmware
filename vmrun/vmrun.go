@@ -323,16 +323,16 @@ func DirectoryExistsInGuest(app, vmx string, username, password string, dir stri
 }
 
 // SetSharedFolderState modify a Host-Guest shared folder.
-func SetSharedFolderState(app, vmx string, shareName, hostPath string, writable bool) bool {
+func SetSharedFolderState(app, vmx string, shareName, hostPath string, writable bool) error {
 	flag := "readonly"
 	if writable {
 		flag = "writable"
 	}
 	if _, err := vmrun(app, "setSharedFolderState", vmx, shareName, hostPath, flag); err != nil {
-		return false
+		return err
 	}
 
-	return true
+	return nil
 }
 
 // AddSharedFolder add a Host-Guest shared folder.
