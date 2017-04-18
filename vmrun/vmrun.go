@@ -287,7 +287,7 @@ func RevertToSnapshot(app, vmx, snapshotName string) error {
 // getGuestIPAddress        Path to vmx file     Gets the IP address of the guest
 //                          [-wait]
 
-// RunInGuestConfig represents a runProgramInGuest command flags.
+// RunInGuestConfig represents a runProgramInGuest and runScriptInGuest commands flag.
 type RunInGuestConfig int
 
 const (
@@ -390,6 +390,7 @@ func RemoveSharedFolder(app, vmx, shareName string) error {
 }
 
 // EnableSharedFolders enable shared folders in Guest.
+//
 // The optional runtime argument means to share folders only until the virtual machine is powered off.
 // Otherwise, the setting persists at next power on.
 func EnableSharedFolders(app, vmx string, runtime bool) error {
@@ -407,6 +408,7 @@ func EnableSharedFolders(app, vmx string, runtime bool) error {
 
 // DisableSharedFolders disable shared folders in Guest.
 // Stops the guest virtual machine, specified by .vmx file, from sharing folders with its host.
+//
 // The optional runtime argument means to stop sharing folders only until the virtual machine is powered off.
 // Otherwise, the setting persists at next power on.
 func DisableSharedFolders(app, vmx string, runtime bool) error {
