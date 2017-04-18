@@ -101,3 +101,23 @@ func (f *Fusion) DirectoryExistsInGuest(username, password string, dir string) b
 func (f *Fusion) SetSharedFolderState(shareName, hostPath string, writable bool) bool {
 	return vmrun.SetSharedFolderState(fusionApp, f.vmx, shareName, hostPath, writable)
 }
+
+// AddSharedFolder add a Host-Guest shared folder.
+func (f *Fusion) AddSharedFolder(shareName, newHostPath string) error {
+	return vmrun.AddSharedFolder(fusionApp, f.vmx, shareName, newHostPath)
+}
+
+// RemoveSharedFolder remove a Host-Guest shared folder.
+func (f *Fusion) RemoveSharedFolder(shareName string) error {
+	return vmrun.RemoveSharedFolder(fusionApp, f.vmx, shareName)
+}
+
+// EnableSharedFolders enable shared folders in Guest.
+func (f *Fusion) EnableSharedFolders(runtime bool) error {
+	return vmrun.EnableSharedFolders(fusionApp, f.vmx, runtime)
+}
+
+// DisableSharedFolders disable shared folders in Guest.
+func (f *Fusion) DisableSharedFolders(runtime bool) error {
+	return vmrun.DisableSharedFolders(fusionApp, f.vmx, runtime)
+}
