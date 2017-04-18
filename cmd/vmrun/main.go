@@ -7,47 +7,50 @@ package main
 import (
 	"log"
 
-	"github.com/go-vm/vmware/fusion"
+	"github.com/go-vm/vmware"
+	"github.com/go-vm/vmware/vmrun"
 )
 
-const vmwarevmPath = "/Volumes/APFS/VirtualMachine/macOS-10.12.vmwarevm/macOS-10.12.vmx"
+const vmxPath = "/Volumes/APFS/VirtualMachine/macOS-10.12.vmwarevm/macOS-10.12.vmx"
 
 func main() {
-	if err := fusion.Start(vmwarevmPath, false); err != nil {
+	fusion := vmware.NewFusion(vmxPath)
+
+	if err := fusion.Start(false); err != nil {
 		panic(err.Error())
 	}
 
-	if err := fusion.RunProgramInGuest(vmwarevmPath, fusion.Auth{Username: "darwinstrap", Password: "darwinstrap"}, fusion.ActiveWindow, "/usr/bin/env"); err != nil {
+	if err := fusion.RunProgramInGuest(vmrun.Auth{Username: "darwinstrap", Password: "darwinstrap"}, vmrun.ActiveWindow, "/usr/bin/env"); err != nil {
 		panic(err.Error())
 	}
 
-	if err := fusion.Stop(vmwarevmPath, true); err != nil {
+	if err := fusion.Halt(); err != nil {
 		panic(err.Error())
 	}
 
-	list, num, err := fusion.ListSnapshots(vmwarevmPath)
+	list, num, err := fusion.ListSnapshots()
 	if err != nil {
 		panic(err.Error())
 	}
 	log.Printf("list: %T => %+v\n", list, list)
 	log.Printf("num: %T => %+v\n", num, num)
 
-	if err := fusion.Snapshot(vmwarevmPath, "testSnapshot"); err != nil {
+	if err := fusion.Snapshot("testSnapshot"); err != nil {
 		panic(err.Error())
 	}
 
-	list2, num2, err := fusion.ListSnapshots(vmwarevmPath)
+	list2, num2, err := fusion.ListSnapshots()
 	if err != nil {
 		panic(err.Error())
 	}
 	log.Printf("list: %T => %+v\n", list2, list2)
 	log.Printf("num: %T => %+v\n", num2, num2)
 
-	if err := fusion.DeleteSnapshot(vmwarevmPath, "testSnapshot", true); err != nil {
+	if err := fusion.DeleteSnapshot("testSnapshot", true); err != nil {
 		panic(err.Error())
 	}
 
-	list3, num3, err := fusion.ListSnapshots(vmwarevmPath)
+	list3, num3, err := fusion.ListSnapshots()
 	if err != nil {
 		panic(err.Error())
 	}
