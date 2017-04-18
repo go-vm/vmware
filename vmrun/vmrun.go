@@ -17,30 +17,6 @@ import (
 
 var vmrunPath = vmwareutil.LookPath("vmrun")
 
-// AUTHENTICATION-FLAGS
-// --------------------
-// These must appear before the command and any command parameters.
-//
-//    -h <hostName>  (not needed for Fusion)
-//    -P <hostPort>  (not needed for Fusion)
-//    -T <hostType> (ws|fusion)
-//    -u <userName in host OS>  (not needed for Fusion)
-//    -p <password in host OS>  (not needed for Fusion)
-//    -vp <password for encrypted virtual machine>
-//    -gu <userName in guest OS>
-//    -gp <password in guest OS>
-
-// Auth represents a guest login data.
-type Auth struct {
-	HostName          string // -h
-	HostPort          string // -P
-	HostUserName      string // -u
-	HostPassword      string // -p
-	EncryptedPassword string // -vp
-	Username          string // -gu
-	Password          string // -gp
-}
-
 // vmrun run the vmrun command with the app name and args, return the stdout result and cmd error.
 func vmrun(app string, arg ...string) (string, error) {
 	// vmrun with nogui on VMware Fusion through at least 8.0.1 doesn't work right
