@@ -525,3 +525,12 @@ func CopyFileFromHostToGuest(app, vmx, username, password, hostFilepath, guestFi
 
 	return nil
 }
+
+// CopyFileFromGuestToHost copy a file from guest OS to host OS.
+func CopyFileFromGuestToHost(app, vmx, username, password, guestFilepath, hostFilepath string) error {
+	if _, err := vmrun(app, "-gu", username, "-gp", password, "CopyFileFromGuestToHost", vmx, guestFilepath, hostFilepath); err != nil {
+		return err
+	}
+
+	return nil
+}

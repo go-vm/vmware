@@ -160,3 +160,8 @@ func (f *Fusion) ListDirectoryInGuest(dir string) ([]string, error) {
 func (f *Fusion) CopyFileFromHostToGuest(hostFilepath, guestFilepath string) error {
 	return vmrun.CopyFileFromHostToGuest(fusionApp, f.vmx, f.username, f.password, hostFilepath, guestFilepath)
 }
+
+// CopyFileFromGuestToHost copy a file from guest OS to host OS.
+func (f *Fusion) CopyFileFromGuestToHost(guestFilepath, hostFilepath string) error {
+	return vmrun.CopyFileFromGuestToHost(fusionApp, f.vmx, f.username, f.password, guestFilepath, hostFilepath)
+}
