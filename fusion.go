@@ -12,13 +12,17 @@ const fusionApp = "fusion"
 
 // Fusion represents a VMware Fusion application.
 type Fusion struct {
-	vmx string
+	vmx      string
+	username string
+	password string
 }
 
 // NewFusion return the new Fusion.
-func NewFusion(vmx string) *Fusion {
+func NewFusion(vmx, username, password string) *Fusion {
 	return &Fusion{
-		vmx: vmx,
+		vmx:      vmx,
+		username: username,
+		password: password,
 	}
 }
 
@@ -83,18 +87,18 @@ func (f *Fusion) RevertToSnapshot(snapshotName string) error {
 }
 
 // RunProgramInGuest run a program in Guest OS.
-func (f *Fusion) RunProgramInGuest(username, password string, config vmrun.RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
-	return vmrun.RunProgramInGuest(fusionApp, f.vmx, username, password, config, cmdPath, cmdArgs...)
+func (f *Fusion) RunProgramInGuest(config vmrun.RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
+	return vmrun.RunProgramInGuest(fusionApp, f.vmx, f.username, f.password, config, cmdPath, cmdArgs...)
 }
 
 // FileExistsInGuest check if a file exists in Guest OS.
-func (f *Fusion) FileExistsInGuest(username, password, filename string) bool {
-	return vmrun.FileExistsInGuest(fusionApp, f.vmx, username, password, filename)
+func (f *Fusion) FileExistsInGuest(filename string) bool {
+	return vmrun.FileExistsInGuest(fusionApp, f.vmx, f.username, f.password, filename)
 }
 
 // DirectoryExistsInGuest check if a directory exists in Guest OS.
-func (f *Fusion) DirectoryExistsInGuest(username, password, dir string) bool {
-	return vmrun.DirectoryExistsInGuest(fusionApp, f.vmx, username, password, dir)
+func (f *Fusion) DirectoryExistsInGuest(dir string) bool {
+	return vmrun.DirectoryExistsInGuest(fusionApp, f.vmx, f.username, f.password, dir)
 }
 
 // SetSharedFolderState modify a Host-Guest shared folder.
@@ -123,11 +127,11 @@ func (f *Fusion) DisableSharedFolders(runtime bool) error {
 }
 
 // ListProcessesInGuest List running processes in Guest OS.
-func (f *Fusion) ListProcessesInGuest(username, password string) ([]vmrun.ListProcessesInGuestInfo, error) {
-	return vmrun.ListProcessesInGuest(fusionApp, f.vmx, username, password)
+func (f *Fusion) ListProcessesInGuest() ([]vmrun.ListProcessesInGuestInfo, error) {
+	return vmrun.ListProcessesInGuest(fusionApp, f.vmx, f.username, f.password)
 }
 
 // KillProcessInGuest kill a process in Guest OS.
-func (f *Fusion) KillProcessInGuest(username, password string, pid int) error {
-	return vmrun.KillProcessInGuest(fusionApp, f.vmx, username, password, pid)
+func (f *Fusion) KillProcessInGuest(pid int) error {
+	return vmrun.KillProcessInGuest(fusionApp, f.vmx, f.username, f.password, pid)
 }
