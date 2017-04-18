@@ -429,7 +429,7 @@ func KillProcessInGuest(app, vmx, username, password string, pid int) error {
 }
 
 // RunScriptInGuest run a script in Guest OS.
-func RunScriptInGuest(app, vmx string, username, password string, config RunInGuestConfig, interpreter, script string) error {
+func RunScriptInGuest(app, vmx, username, password string, config RunInGuestConfig, interpreter, script string) error {
 	args := []string{"-gu", username, "-gp", password, "runScriptInGuest", vmx}
 
 	if config&NoWait > 0 {
