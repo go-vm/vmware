@@ -155,3 +155,8 @@ func (f *Fusion) CreateTempfileInGuest() (string, error) {
 func (f *Fusion) ListDirectoryInGuest(dir string) ([]string, error) {
 	return vmrun.ListDirectoryInGuest(fusionApp, f.vmx, f.username, f.password, dir)
 }
+
+// CopyFileFromHostToGuest copy a file from host OS to guest OS.
+func (f *Fusion) CopyFileFromHostToGuest(hostFilepath, guestFilepath string) error {
+	return vmrun.CopyFileFromHostToGuest(fusionApp, f.vmx, f.username, f.password, hostFilepath, guestFilepath)
+}

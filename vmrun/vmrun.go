@@ -516,3 +516,12 @@ func ListDirectoryInGuest(app, vmx, username, password, dir string) ([]string, e
 
 	return files, nil
 }
+
+// CopyFileFromHostToGuest copy a file from host OS to guest OS.
+func CopyFileFromHostToGuest(app, vmx, username, password, hostFilepath, guestFilepath string) error {
+	if _, err := vmrun(app, "-gu", username, "-gp", password, "CopyFileFromHostToGuest", vmx, hostFilepath, guestFilepath); err != nil {
+		return err
+	}
+
+	return nil
+}
