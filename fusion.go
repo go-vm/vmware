@@ -140,3 +140,8 @@ func (f *Fusion) KillProcessInGuest(pid int) error {
 func (f *Fusion) RunScriptInGuest(config vmrun.RunInGuestConfig, interpreter, script string) error {
 	return vmrun.RunScriptInGuest(fusionApp, f.vmx, f.username, f.password, config, interpreter, script)
 }
+
+// DeleteFileInGuest delete a file in Guest OS.
+func (f *Fusion) DeleteFileInGuest(filename string) error {
+	return vmrun.DeleteFileInGuest(fusionApp, f.vmx, f.username, f.password, filename)
+}

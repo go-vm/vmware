@@ -450,3 +450,12 @@ func RunScriptInGuest(app, vmx, username, password string, config RunInGuestConf
 
 	return nil
 }
+
+// DeleteFileInGuest delete a file in Guest OS.
+func DeleteFileInGuest(app, vmx, username, password, filename string) error {
+	if _, err := vmrun(app, "-gu", username, "-gp", password, "deleteFileInGuest", vmx, filename); err != nil {
+		return err
+	}
+
+	return nil
+}
