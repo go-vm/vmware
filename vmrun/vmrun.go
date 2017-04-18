@@ -368,3 +368,20 @@ func EnableSharedFolders(app, vmx string, runtime bool) error {
 
 	return nil
 }
+
+// DisableSharedFolders disable shared folders in Guest.
+// Stops the guest virtual machine, specified by .vmx file, from sharing folders with its host.
+// The optional runtime argument means to stop sharing folders only until the virtual machine is powered off.
+// Otherwise, the setting persists at next power on.
+func DisableSharedFolders(app, vmx string, runtime bool) error {
+	args := []string{"disableSharedFolders", vmx}
+	if runtime {
+		args = append(args, "runtime")
+	}
+
+	if _, err := vmrun(app, args...); err != nil {
+		return err
+	}
+
+	return nil
+}
