@@ -165,3 +165,8 @@ func (f *Fusion) CopyFileFromHostToGuest(hostFilepath, guestFilepath string) err
 func (f *Fusion) CopyFileFromGuestToHost(guestFilepath, hostFilepath string) error {
 	return vmrun.CopyFileFromGuestToHost(fusionApp, f.vmx, f.username, f.password, guestFilepath, hostFilepath)
 }
+
+// RenameFileInGuest rename a file in Guest OS.
+func (f *Fusion) RenameFileInGuest(src, dst string) error {
+	return vmrun.RenameFileInGuest(fusionApp, f.vmx, f.username, f.password, src, dst)
+}

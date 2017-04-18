@@ -534,3 +534,12 @@ func CopyFileFromGuestToHost(app, vmx, username, password, guestFilepath, hostFi
 
 	return nil
 }
+
+// RenameFileInGuest rename a file in Guest OS.
+func RenameFileInGuest(app, vmx, username, password, src, dst string) error {
+	if _, err := vmrun(app, "-gu", username, "-gp", password, "renameFileInGuest", vmx, src, dst); err != nil {
+		return err
+	}
+
+	return nil
+}
