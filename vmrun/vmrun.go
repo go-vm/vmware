@@ -425,3 +425,26 @@ func KillProcessInGuest(app, vmx, username, password string, pid int) error {
 
 	return nil
 }
+
+// RunScriptInGuest run a script in Guest OS.
+func RunScriptInGuest(app, vmx string, username, password string, config RunInGuestConfig, interpreter, script string) error {
+	args := []string{"-gu", username, "-gp", password, "runScriptInGuest", vmx}
+
+	if config&NoWait > 0 {
+		args = append(args, "-noWait")
+	}
+	if config&ActiveWindow > 0 {
+		args = append(args, "-activeWindow")
+	}
+	if config&Interactive > 0 {
+		args = append(args, "-interactive")
+	}
+
+	args = append(args, interpreter, script)
+
+	if _, err := vmrun(app, args...); err != nil {
+		return err
+	}
+
+	return nil
+}

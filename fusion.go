@@ -135,3 +135,8 @@ func (f *Fusion) ListProcessesInGuest() ([]vmrun.ListProcessesInGuestInfo, error
 func (f *Fusion) KillProcessInGuest(pid int) error {
 	return vmrun.KillProcessInGuest(fusionApp, f.vmx, f.username, f.password, pid)
 }
+
+// RunScriptInGuest run a script in Guest OS.
+func (f *Fusion) RunScriptInGuest(config vmrun.RunInGuestConfig, interpreter, script string) error {
+	return vmrun.RunScriptInGuest(fusionApp, f.vmx, f.username, f.password, config, interpreter, script)
+}
