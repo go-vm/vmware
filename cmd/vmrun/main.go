@@ -17,6 +17,10 @@ func main() {
 		panic(err.Error())
 	}
 
+	if err := fusion.RunProgramInGuest(vmwarevmPath, fusion.Auth{Username: "darwinstrap", Password: "darwinstrap"}, fusion.ActiveWindow, "/usr/bin/env"); err != nil {
+		panic(err.Error())
+	}
+
 	if err := fusion.Stop(vmwarevmPath, true); err != nil {
 		panic(err.Error())
 	}
