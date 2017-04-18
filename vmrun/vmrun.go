@@ -343,3 +343,12 @@ func AddSharedFolder(app, vmx string, shareName, newHostPath string) error {
 
 	return nil
 }
+
+// RemoveSharedFolder remove a Host-Guest shared folder.
+func RemoveSharedFolder(app, vmx, shareName string) error {
+	if _, err := vmrun(app, "removeSharedFolder", vmx, shareName); err != nil {
+		return err
+	}
+
+	return nil
+}
