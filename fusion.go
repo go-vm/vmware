@@ -88,12 +88,12 @@ func (f *Fusion) RunProgramInGuest(username, password string, config vmrun.RunPr
 }
 
 // FileExistsInGuest check if a file exists in Guest OS.
-func (f *Fusion) FileExistsInGuest(username, password string, filename string) bool {
+func (f *Fusion) FileExistsInGuest(username, password, filename string) bool {
 	return vmrun.FileExistsInGuest(fusionApp, f.vmx, username, password, filename)
 }
 
 // DirectoryExistsInGuest check if a directory exists in Guest OS.
-func (f *Fusion) DirectoryExistsInGuest(username, password string, dir string) bool {
+func (f *Fusion) DirectoryExistsInGuest(username, password, dir string) bool {
 	return vmrun.DirectoryExistsInGuest(fusionApp, f.vmx, username, password, dir)
 }
 
