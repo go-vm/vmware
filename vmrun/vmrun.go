@@ -91,16 +91,6 @@ func Stop(app, vmx string, hard bool) error {
 	return nil
 }
 
-// ShutDown wrap of stop command with hard.
-func ShutDown(app, vmx string) error {
-	return Stop(app, vmx, true)
-}
-
-// Halt wrap of stop command with soft.
-func Halt(app, vmx string) error {
-	return Stop(app, vmx, false)
-}
-
 // Reset reset a VM or Team.
 func Reset(app, vmx string, hard bool) error {
 	flag := "soft"
@@ -113,11 +103,6 @@ func Reset(app, vmx string, hard bool) error {
 	}
 
 	return nil
-}
-
-// Restart restart a VM uses wrap of reset command with soft.
-func Restart(app, vmx string) error {
-	return Reset(app, vmx, false)
 }
 
 // Suspend Suspend a VM or Team.
