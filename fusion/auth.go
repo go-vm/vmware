@@ -17,8 +17,9 @@ package fusion
 //    -gu <userName in guest OS>
 //    -gp <password in guest OS>
 
-// Authentication represents a guest login data.
-type Authentication struct {
-	User string
-	Pass string
+// Auth represents a guest login data.
+type Auth struct {
+	Username          string // -gu
+	Password          string // -gp
+	EncryptedPassword string // -vp
 }
