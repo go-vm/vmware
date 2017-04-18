@@ -170,3 +170,8 @@ func (f *Fusion) CopyFileFromGuestToHost(guestFilepath, hostFilepath string) err
 func (f *Fusion) RenameFileInGuest(src, dst string) error {
 	return vmrun.RenameFileInGuest(fusionApp, f.vmx, f.username, f.password, src, dst)
 }
+
+// CaptureScreen capture the screen of the VM to a local file.
+func (f *Fusion) CaptureScreen(dst string) error {
+	return vmrun.CaptureScreen(fusionApp, f.vmx, f.username, f.password, dst)
+}

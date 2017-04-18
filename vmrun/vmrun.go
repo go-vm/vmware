@@ -543,3 +543,12 @@ func RenameFileInGuest(app, vmx, username, password, src, dst string) error {
 
 	return nil
 }
+
+// CaptureScreen capture the screen of the VM to a local file.
+func CaptureScreen(app, vmx, username, password, dst string) error {
+	if _, err := vmrun(app, "-gu", username, "-gp", password, "captureScreen", vmx, dst); err != nil {
+		return err
+	}
+
+	return nil
+}
