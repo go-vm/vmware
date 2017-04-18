@@ -41,6 +41,24 @@ func vmrun(app string, arg ...string) (string, error) {
 	return stdout.String(), err
 }
 
+// POWER COMMANDS           PARAMETERS           DESCRIPTION
+// --------------           ----------           -----------
+// start                    Path to vmx file     Start a VM or Team
+//                          [gui|nogui]
+//
+// stop                     Path to vmx file     Stop a VM or Team
+//                          [hard|soft]
+//
+// reset                    Path to vmx file     Reset a VM or Team
+//                          [hard|soft]
+//
+// suspend                  Path to vmx file     Suspend a VM or Team
+//                          [hard|soft]
+//
+// pause                    Path to vmx file     Pause a VM
+//
+// unpause                  Path to vmx file     Unpause a VM
+
 // Start start a VM or Team.
 func Start(app, vmx string, gui bool) error {
 	flag := "nogui"
