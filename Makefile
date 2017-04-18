@@ -8,3 +8,6 @@ golint:
 
 vet:
 	@go vet ./...
+
+vmrun: cmd/vmrun/main.go
+	@go run cmd/vmrun/main.go
