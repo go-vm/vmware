@@ -1,3 +1,8 @@
+default: test
+
+install:
+	@go install -v -x ./...
+
 test: lint
 	@go test -v ./...
 
@@ -9,5 +14,5 @@ golint:
 vet:
 	@go vet ./...
 
-vmrun: cmd/vmrun/main.go
-	@go run cmd/vmrun/main.go
+vmruntest: cmd/vmruntest/main.go
+	@go run cmd/vmruntest/main.go
