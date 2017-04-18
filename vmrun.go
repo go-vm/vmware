@@ -15,21 +15,6 @@ var vmrunPath = vmwareCmd("vmrun")
 
 // VMRun run the vmrun command with the app name and args.
 // Return the stdout result and cmd error.
-//
-// Usage: vmrun [AUTHENTICATION-FLAGS] COMMAND [PARAMETERS]
-//
-// AUTHENTICATION-FLAGS
-// --------------------
-// These must appear before the command and any command parameters.
-//
-//    -h <hostName>  (not needed for Fusion)
-//    -P <hostPort>  (not needed for Fusion)
-//    -T <hostType> (ws|fusion)
-//    -u <userName in host OS>  (not needed for Fusion)
-//    -p <password in host OS>  (not needed for Fusion)
-//    -vp <password for encrypted virtual machine>
-//    -gu <userName in guest OS>
-//    -gp <password in guest OS>
 func VMRun(app string, arg ...string) (string, error) {
 	// vmrun with nogui on VMware Fusion through at least 8.0.1 doesn't work right
 	// if the umask is set to not allow world-readable permissions
@@ -40,12 +25,13 @@ func VMRun(app string, arg ...string) (string, error) {
 
 	var stdout bytes.Buffer
 	cmd.Stdout = &stdout
-	if runErr := cmd.Run(); runErr != nil {
-		if err := runErr.(*exec.ExitError); err != nil {
+
+	err := cmd.Run()
+	if err != nil {
+		if runErr := err.(*exec.ExitError); runErr != nil {
 			return "", fmt.Errorf(stdout.String())
 		}
-		return "", runErr
 	}
 
-	return stdout.String(), nil
+	return stdout.String(), err
 }
