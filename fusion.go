@@ -62,7 +62,7 @@ func (f *Fusion) Pause() error {
 }
 
 // Unpause unpause a VM.
-func (f *Fusion) Unpause(vmx string) error {
+func (f *Fusion) Unpause() error {
 	return vmrun.Unpause(fusionApp, f.vmx)
 }
 
