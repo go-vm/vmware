@@ -352,3 +352,19 @@ func RemoveSharedFolder(app, vmx, shareName string) error {
 
 	return nil
 }
+
+// EnableSharedFolders enable shared folders in Guest.
+// The optional runtime argument means to share folders only until the virtual machine is powered off.
+// Otherwise, the setting persists at next power on.
+func EnableSharedFolders(app, vmx string, runtime bool) error {
+	args := []string{"enableSharedFolders", vmx}
+	if runtime {
+		args = append(args, "runtime")
+	}
+
+	if _, err := vmrun(app, args...); err != nil {
+		return err
+	}
+
+	return nil
+}
