@@ -2,9 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build darwin
-
 package vmware
 
-// VMRunPath is the path to the vmrun command line utility.
-var VMRunPath = "/Applications/VMware Fusion.app/Contents/Library/vmrun"
+// vmwareDir is default directory path of vmware commands to fallback when it is not on path.
+var vmwareDir = "/usr/bin"

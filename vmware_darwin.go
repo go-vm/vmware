@@ -2,9 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build linux
-
 package vmware
 
-// VMRunPath is a hardcoded path to fall back to when vmrun is not in the $PATH.
-var VMRunPath = "/usr/bin/vmrun"
+// vmwareDir is default directory path of vmware commands to fallback when it is not on path.
+var vmwareDir = "/Applications/VMware Fusion.app/Contents/Library"
