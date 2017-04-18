@@ -11,16 +11,7 @@ import (
 	"syscall"
 )
 
-var vmrun string
-
-func init() {
-	var err error
-
-	vmrun, err = exec.LookPath("vmrun")
-	if err != nil {
-		vmrun = VMRunPath // fallback the vmrun binary path
-	}
-}
+var vmrunPath = vmwareCmd("vmrun")
 
 // VMRun run the vmrun command with the app name and args.
 // Return the stdout result and cmd error.
@@ -44,7 +35,7 @@ func VMRun(app string, arg ...string) (string, error) {
 	// if the umask is set to not allow world-readable permissions
 	_ = syscall.Umask(022)
 
-	cmd := exec.Command(vmrun, "-T", app)
+	cmd := exec.Command(vmrunPath, "-T", app)
 	cmd.Args = append(cmd.Args, arg...)
 
 	var stdout bytes.Buffer
