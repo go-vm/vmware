@@ -83,21 +83,21 @@ func (f *Fusion) RevertToSnapshot(snapshotName string) error {
 }
 
 // RunProgramInGuest run a program in Guest OS.
-func (f *Fusion) RunProgramInGuest(auth vmrun.Auth, config vmrun.RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
-	return vmrun.RunProgramInGuest(fusionApp, f.vmx, auth, config, cmdPath, cmdArgs...)
+func (f *Fusion) RunProgramInGuest(username, password string, config vmrun.RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
+	return vmrun.RunProgramInGuest(fusionApp, f.vmx, username, password, config, cmdPath, cmdArgs...)
 }
 
 // FileExistsInGuest check if a file exists in Guest OS.
-func (f *Fusion) FileExistsInGuest(auth vmrun.Auth, filename string) bool {
-	return vmrun.FileExistsInGuest(fusionApp, f.vmx, auth, filename)
+func (f *Fusion) FileExistsInGuest(username, password string, filename string) bool {
+	return vmrun.FileExistsInGuest(fusionApp, f.vmx, username, password, filename)
 }
 
 // DirectoryExistsInGuest check if a directory exists in Guest OS.
-func (f *Fusion) DirectoryExistsInGuest(auth vmrun.Auth, dir string) bool {
-	return vmrun.DirectoryExistsInGuest(fusionApp, f.vmx, auth, dir)
+func (f *Fusion) DirectoryExistsInGuest(username, password string, dir string) bool {
+	return vmrun.DirectoryExistsInGuest(fusionApp, f.vmx, username, password, dir)
 }
 
 // SetSharedFolderState modify a Host-Guest shared folder.
-func (f *Fusion) SetSharedFolderState(auth vmrun.Auth, shareName, hostPath string, writable bool) bool {
-	return vmrun.SetSharedFolderState(fusionApp, f.vmx, auth, shareName, hostPath, writable)
+func (f *Fusion) SetSharedFolderState(shareName, hostPath string, writable bool) bool {
+	return vmrun.SetSharedFolderState(fusionApp, f.vmx, shareName, hostPath, writable)
 }

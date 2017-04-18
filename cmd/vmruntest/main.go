@@ -20,7 +20,7 @@ func main() {
 		panic(err.Error())
 	}
 
-	if err := fusion.RunProgramInGuest(vmrun.Auth{Username: "darwinstrap", Password: "darwinstrap"}, vmrun.ActiveWindow, "/usr/bin/env"); err != nil {
+	if err := fusion.RunProgramInGuest("darwinstrap", "darwinstrap", vmrun.ActiveWindow, "/usr/bin/env"); err != nil {
 		panic(err.Error())
 	}
 
