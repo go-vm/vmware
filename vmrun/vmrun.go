@@ -470,3 +470,17 @@ func CreateTempfileInGuest(app, vmx, username, password string) (string, error) 
 
 	return filepath.Clean(stdout), nil
 }
+
+var listDirectoryInGuestRe = regexp.MustCompile(`[^Directory list: \d](\w+)`)
+
+// ListDirectoryInGuest list a directory in Guest OS.
+func ListDirectoryInGuest(app, vmx, username, password, dir string) ([]string, error) {
+	stdout, err := vmrun(app, "-gu", username, "-gp", password, "listDirectoryInGuest", vmx, dir)
+	if err != nil {
+		return nil, err
+	}
+
+	files := listDirectoryInGuestRe.FindAllString(stdout, -1)
+
+	return files, nil
+}

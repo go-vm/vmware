@@ -150,3 +150,8 @@ func (f *Fusion) DeleteFileInGuest(filename string) error {
 func (f *Fusion) CreateTempfileInGuest() (string, error) {
 	return vmrun.CreateTempfileInGuest(fusionApp, f.vmx, f.username, f.password)
 }
+
+// ListDirectoryInGuest list a directory in Guest OS.
+func (f *Fusion) ListDirectoryInGuest(dir string) ([]string, error) {
+	return vmrun.ListDirectoryInGuest(fusionApp, f.vmx, f.username, f.password, dir)
+}
