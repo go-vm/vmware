@@ -385,3 +385,33 @@ func DisableSharedFolders(app, vmx string, runtime bool) error {
 
 	return nil
 }
+
+// ListProcessesInGuestInfo represents a result of listprocessesinguest command.
+type ListProcessesInGuestInfo struct {
+	Pid   string
+	Owner string
+	Cmd   string
+}
+
+var listProcessesInGuestRe = regexp.MustCompile(`pid=(\d+), owner=(\w+), cmd=([[:print:]]+)`)
+
+// ListProcessesInGuest List running processes in Guest OS
+func ListProcessesInGuest(app, vmx, username, password string) ([]ListProcessesInGuestInfo, error) {
+	stdout, err := vmrun(app, "-gu", username, "-gp", password, "listprocessesinguest", vmx)
+	if err != nil {
+		return nil, err
+	}
+
+	cmdList := listProcessesInGuestRe.FindAllStringSubmatch(stdout, -1)
+
+	var list []ListProcessesInGuestInfo
+	for _, cmd := range cmdList {
+		list = append(list, ListProcessesInGuestInfo{
+			Pid:   cmd[1],
+			Owner: cmd[2],
+			Cmd:   cmd[3],
+		})
+	}
+
+	return list, nil
+}
