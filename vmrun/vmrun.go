@@ -334,3 +334,12 @@ func SetSharedFolderState(app, vmx string, shareName, hostPath string, writable 
 
 	return true
 }
+
+// AddSharedFolder add a Host-Guest shared folder.
+func AddSharedFolder(app, vmx string, shareName, newHostPath string) error {
+	if _, err := vmrun(app, "addSharedFolder", vmx, shareName, newHostPath); err != nil {
+		return err
+	}
+
+	return nil
+}
