@@ -87,7 +87,7 @@ func (f *Fusion) RevertToSnapshot(snapshotName string) error {
 }
 
 // RunProgramInGuest run a program in Guest OS.
-func (f *Fusion) RunProgramInGuest(config vmrun.RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
+func (f *Fusion) RunProgramInGuest(config vmrun.RunInGuestConfig, cmdPath string, cmdArgs ...string) error {
 	return vmrun.RunProgramInGuest(fusionApp, f.vmx, f.username, f.password, config, cmdPath, cmdArgs...)
 }
 

@@ -266,13 +266,13 @@ func RevertToSnapshot(app, vmx, snapshotName string) error {
 // getGuestIPAddress        Path to vmx file     Gets the IP address of the guest
 //                          [-wait]
 
-// RunProgramInGuestConfig represents a runProgramInGuest command flags.
-type RunProgramInGuestConfig int
+// RunInGuestConfig represents a runProgramInGuest command flags.
+type RunInGuestConfig int
 
 const (
 	// NoWait returns a prompt immediately after the program starts in the guest, rather than waiting for it to finish.
 	// This option is useful for interactive programs.
-	NoWait RunProgramInGuestConfig = 1 << iota
+	NoWait RunInGuestConfig = 1 << iota
 	// ActiveWindow ensures that the Windows GUI is visible, not minimized.
 	// It has no effect on Linux.
 	ActiveWindow
@@ -282,7 +282,7 @@ const (
 )
 
 // RunProgramInGuest run a program in Guest OS.
-func RunProgramInGuest(app, vmx string, username, password string, config RunProgramInGuestConfig, cmdPath string, cmdArgs ...string) error {
+func RunProgramInGuest(app, vmx string, username, password string, config RunInGuestConfig, cmdPath string, cmdArgs ...string) error {
 	args := []string{"-gu", username, "-gp", password, "runProgramInGuest", vmx}
 
 	if config&NoWait > 0 {
