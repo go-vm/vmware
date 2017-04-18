@@ -284,18 +284,32 @@ const (
 	Interactive
 )
 
+// String implements a fmt.Stringer interface.
+func (r RunInGuestConfig) String() string {
+	switch r {
+	case NoWait:
+		return "-noWait"
+	case ActiveWindow:
+		return "-activeWindow"
+	case Interactive:
+		return "-interactive"
+	default:
+		return ""
+	}
+}
+
 // RunProgramInGuest run a program in Guest OS.
 func RunProgramInGuest(app, vmx string, username, password string, config RunInGuestConfig, cmdPath string, cmdArgs ...string) error {
 	args := []string{"-gu", username, "-gp", password, "runProgramInGuest", vmx}
 
 	if config&NoWait > 0 {
-		args = append(args, "-noWait")
+		args = append(args, NoWait.String())
 	}
 	if config&ActiveWindow > 0 {
-		args = append(args, "-activeWindow")
+		args = append(args, ActiveWindow.String())
 	}
 	if config&Interactive > 0 {
-		args = append(args, "-interactive")
+		args = append(args, Interactive.String())
 	}
 
 	args = append(args, cmdPath)
@@ -434,13 +448,13 @@ func RunScriptInGuest(app, vmx, username, password string, config RunInGuestConf
 	args := []string{"-gu", username, "-gp", password, "runScriptInGuest", vmx}
 
 	if config&NoWait > 0 {
-		args = append(args, "-noWait")
+		args = append(args, NoWait.String())
 	}
 	if config&ActiveWindow > 0 {
-		args = append(args, "-activeWindow")
+		args = append(args, ActiveWindow.String())
 	}
 	if config&Interactive > 0 {
-		args = append(args, "-interactive")
+		args = append(args, Interactive.String())
 	}
 
 	args = append(args, interpreter, script)
