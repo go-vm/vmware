@@ -126,7 +126,7 @@ type Config struct {
 // Create create disk.
 func Create(dst string, config *Config) error {
 	size := 20000       // default is 20GB
-	var diskType int    // default is 0
+	diskType := 0       // default is 0
 	adapter := LsiLogic // default is lsilogic
 
 	if config != nil {
