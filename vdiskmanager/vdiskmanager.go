@@ -124,20 +124,21 @@ type Config struct {
 }
 
 // Create create disk.
-func Create(dst string, config Config) error {
-	size := 20000 // default is 20GB
-	if config.Size > 0 {
-		size = config.Size
-	}
-
-	var diskType int // default is 0
-	if config.DiskType > 0 {
-		diskType = config.DiskType
-	}
-
+func Create(dst string, config *Config) error {
+	size := 20000       // default is 20GB
+	var diskType int    // default is 0
 	adapter := LsiLogic // default is lsilogic
-	if config.Adapter > 0 {
-		adapter = config.Adapter
+
+	if config != nil {
+		if config.Size > 0 {
+			size = config.Size
+		}
+		if config.DiskType > 0 {
+			diskType = config.DiskType
+		}
+		if config.Adapter > 0 {
+			adapter = config.Adapter
+		}
 	}
 
 	if !strings.HasSuffix(dst, ".vmdk") {
