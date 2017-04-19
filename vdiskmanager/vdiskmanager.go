@@ -123,11 +123,17 @@ type Config struct {
 	Adapter  AdapterType
 }
 
+const (
+	defaultSize     = 20000    // default is 20GB
+	defaultDiskType = 0        // default is 0(single growable virtual disk)
+	defaultAdapter  = LsiLogic // default is lsilogic
+)
+
 // Create create disk.
 func Create(dst string, config *Config) error {
-	size := 20000       // default is 20GB
-	diskType := 0       // default is 0
-	adapter := LsiLogic // default is lsilogic
+	size := defaultSize
+	diskType := defaultDiskType
+	adapter := defaultAdapter
 
 	if config != nil {
 		if config.Size > 0 {
