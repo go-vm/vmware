@@ -257,7 +257,13 @@ func TestConvert(t *testing.T) {
 			if err := createTestVDMK(tt.args.src); err != nil {
 				t.Fatal(err)
 			}
-			defer os.Remove(tt.args.dst)
+			// remove test vmdk files with globbing
+			defer func() {
+				files, _ := filepath.Glob("*.vmdk")
+				for _, file := range files {
+					os.Remove(file)
+				}
+			}()
 
 			if err := Convert(tt.args.src, tt.args.dst, tt.args.diskType); (err != nil) != tt.wantErr {
 				t.Errorf("Convert(%v, %v, %v) error = %v, wantErr %v", tt.args.src, tt.args.dst, tt.args.diskType, err, tt.wantErr)
