@@ -162,7 +162,7 @@ func Rename(src, dst string) error {
 	return vdiskmanager("-n", src, dst)
 }
 
-// prepare the mounted virtual disk specified by the volume path for shrinking.
+// Prepare the mounted virtual disk specified by the volume path for shrinking.
 func Prepare(src string) error {
 	return vdiskmanager("-p", src)
 }
